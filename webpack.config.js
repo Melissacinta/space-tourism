@@ -86,12 +86,14 @@ module.exports = {
   target: target,
   devtool: "source-map",
   resolve: {
-    extentions: [".js", ".jsx"],
+    extensions: [".js", ".jsx"],
   },
   devServer: {
-    contentBase: "./public",
+    static: {
+      directory: path.join(__dirname, 'public'),
+    },
     historyApiFallback: true,
-    host: "0.0.0.0",
+    host: "localhost",
     hot: true,
     open: true,
     port: 3000,
