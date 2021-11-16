@@ -1,0 +1,1 @@
+{"version":3,"file":"main.js","mappings":"yBACAA,QAAQC,IAAI,e","sources":["webpack://space-tourism/./src/index.js"],"sourcesContent":["import \"./sass/index.scss\";\r\nconsole.log(\"Hey I work!\")"],"names":["console","log"],"sourceRoot":""}
