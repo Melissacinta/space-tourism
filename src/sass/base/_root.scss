@@ -1,0 +1,62 @@
+@use '../abstracts/colors' as *;
+@use '../abstracts/type-scale' as *;
+@use '../abstracts/mq-manager' as *;
+/*!Theme Name:
+Theme URI: https://space-tourist.netlify.app/
+Repository: https://github.com/Melissacinta/space-tourism
+Description: A Space Tourism project from frontend mentor challeges
+Authors' Names: Chukwuzube Samuel and Aguluka Ngozi
+Authors' Monikers: pHoeniX-svg and Melissacinta
+Version: 01
+*/
+
+/* ////////////////////////////////////////////
+// BASE CONFIGURATION
+*/
+:root {
+  // outputs the theme colors as css variables
+  @each $color, $shades in $colors {
+    @each $shade, $value in $shades {
+      --clr-#{$color}-#{$shade}: #{$value};
+    }
+  }
+
+  --clr-dark: 230 35% 7%;
+  --clr-light: 231 77% 90%;
+  --clr-white: 0 0% 100%;
+
+  --clr-success: hsl(134, 61%, 41%);
+  --clr-danger: hsl(354, 70%, 54%);
+
+  // outputs the font-sizes as css custom variables
+  @each $weight, $value in $font-weights {
+    --fw-#{$weight}: #{$value};
+  }
+
+  // outputs the font-sizes as css custom variables
+  @each $screen-size, $font-size in $type-scale {
+    @if $screen-size == small {
+      @each $size, $value in $font-size {
+        --fs-#{$size}: #{$value};
+      }
+    } @else {
+      @include media('>=desk') {
+        @each $size, $value in $font-size {
+          --fs-#{$size}: #{$value};
+        }
+      }
+    }
+  }
+  --fs-xl: clamp(4.5rem, 8vw, 9rem);
+
+  --ff-accent: 'Poppins', sans-serif;
+  --ff-primary: 'Poppins', sans-serif;
+  --b-radius: 0.8rem;
+  --spacer: 2rem;
+  --spacing: 0.02em;
+  --shadow-100: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.1);
+  --shadow-200: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.2);
+  --shadow-300: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.3);
+  --transition: all 0.2s ease;
+  --max-width: 130rem;
+}

@@ -1,0 +1,87 @@
+@use '../abstracts/mq-manager' as *;
+html {
+  box-sizing: border-box;
+  font-size: 50%; //=>      8px
+  text-rendering: optimizeSpeed;
+
+  @include media('>=tab', '<pad', 'screen') {
+    font-size: 56.25%; //=> 9px
+  }
+  @include media('>=pad', '<large', 'screen') {
+    font-size: 62.5%; //=>  10px
+  }
+  @include media('>=large', 'screen') {
+    font-size: 75%; //=>    12px
+  }
+
+  &,
+  &:focus-within {
+    scroll-behavior: smooth;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* Make images easier to work with */
+img:not(.logo),
+picture:not(.logo) {
+  max-width: 100%;
+}
+
+img,
+picture {
+  height: auto;
+  display: block;
+}
+ul {
+  list-style-type: none;
+}
+
+a:not(.btn) {
+  &:link,
+  &:visited {
+    text-decoration: none;
+    color: currentColor;
+  }
+  &:hover,
+  &:focus {
+    -webkit-text-decoration-color: var(--clr-accent-400);
+    text-decoration-color: var(--clr-accent-400);
+  }
+}
+/* Inherit fonts for inputs and buttons */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  outline: none;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
