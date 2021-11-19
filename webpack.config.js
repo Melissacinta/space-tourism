@@ -1,50 +1,49 @@
-const path = require("path");
+const path = require('path');
 const glob = require('glob');
-const {CleanWebpackPlugin} = require("clean-webpack-plugin");
-const PurgecssPlugin = require("purgecss-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const PurgecssPlugin = require('purgecss-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-
-let mode = "development";
-let target = "web";
-if (process.env.NODE_ENV ==="production") {
-    mode = "production";
-    target = "browserslist"
+let mode = 'development';
+let target = 'web';
+if (process.env.NODE_ENV === 'production') {
+  mode = 'production';
+  target = 'browserslist';
 }
 const PATHS = {
-    src: path.join(__dirname, "src"),
-}
+  src: path.join(__dirname, 'src'),
+};
 
-const plugins =[
-    new CleanWebpackPlugin(),
-    new PurgecssPlugin({
-        paths: glob.sync(`${PATHS.src}/**/*`,{
-            nodir:true
-        })
+const plugins = [
+  new CleanWebpackPlugin(),
+  new PurgecssPlugin({
+    paths: glob.sync(`${PATHS.src}/**/*`, {
+      nodir: true,
     }),
-    new MiniCssExtractPlugin({filename:"[name].css"}),
-    new HtmlWebpackPlugin({template: "./src/index.html"})
-]
+  }),
+  new MiniCssExtractPlugin({ filename: '[name].css' }),
+  new HtmlWebpackPlugin({ template: './src/index.html' }),
+];
 module.exports = {
   mode: mode,
-  entry: "./src/index.js",
+  entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, "public"),
-    assetModuleFilename: "images/[hash][ext][query]",
+    path: path.resolve(__dirname, 'public'),
+    assetModuleFilename: 'assets/[hash][ext][query]',
     clean: true,
   },
-  optimization:{
-      splitChunks:{
-          cacheGroups:{
-              styles:{
-                  name: "style",
-                  test:/\.css/i,
-                  chunks: "all",
-                  enforce: true
-              }
-          }
-      }
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: 'style',
+          test: /\.css/i,
+          chunks: 'all',
+          enforce: true,
+        },
+      },
+    },
   },
   module: {
     rules: [
@@ -54,27 +53,27 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: "",
+              publicPath: '',
             },
           },
-          "css-loader",
-          "postcss-loader",
-          "sass-loader",
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
         ],
       },
       {
         test: /\.(png|jpe?g|gif|svg|webp)$/i,
-        type: "asset/resource",
+        type: 'asset/resource',
       },
       {
         test: /\.html$/i,
-        loader: "html-loader",
+        loader: 'html-loader',
       },
       {
         test: /\.jsx?$/i,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
             cacheDirectory: true,
           },
@@ -84,16 +83,16 @@ module.exports = {
   },
   plugins: plugins,
   target: target,
-  devtool: "source-map",
+  devtool: 'source-map',
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: ['.js', '.jsx'],
   },
   devServer: {
     static: {
       directory: path.join(__dirname, 'public'),
     },
     historyApiFallback: true,
-    host: "localhost",
+    host: 'localhost',
     hot: true,
     open: true,
     port: 3000,
